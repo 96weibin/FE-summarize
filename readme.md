@@ -1041,7 +1041,8 @@ fun.bind(this指向的对象)  返回的一个新的函数，新的函数内部�
 ```
 
 自定义事件一：
-```
+
+```js
 var elem = document.querySelector('div');
 //创建一个基于Event类型的事件
 var eve = document.createEvent('Event');
@@ -1219,26 +1220,31 @@ document.body.scrollTop = document.documentElement.scrollTop = 0;
 ```
 
 得到窗口的宽度和高度
-```
+
+```js
 var windowwidth = document.body.clientWidth || document.documentElement.clientWidth;
 var windowHeight = document.body.clientHeight || document.documentElement.clientHeight;
 ```
 
 js实现响应式
-```
+
+```html
 通过窗口的resize事件实时得到当前窗口的宽度值，根据不同宽度切换不同的css外链样式
 ```
 
 显示鼠标当前位置在所在元素的坐标
-```
+
+```js
 默认的有offsetX, offsetY, 之前不兼容
 有些时候当有子元素的时候还是不可用，比如在放大镜，需要我们自己周转
 var offsetXValue = event.clientY - (getAllTop(obj) - scrollTop);
 ```
 
-##20170901
+## 20170901
+
 吸顶效果：
-```
+
+```js
 var mainNav =document.querySelector('#main-nav');
 var topDis = getAllTop(mainNav);
 window.onscroll = function(e) {
@@ -1261,71 +1267,74 @@ function getAllTop(obj) {
 }
 ```
 
+### 绑定滚轮事件，得到滚动的方向值：
 
-###绑定滚轮事件，得到滚动的方向值：
-```
+```js
 oDiv.onmousewheel = mousewheelHandler;
 if (oDiv.addEventListener) {
-	oDiv.addEventListener('DOMMouseScroll', mousewheelHandler, false);
+  oDiv.addEventListener('DOMMouseScroll', mousewheelHandler, false);
 }
 
 function mousewheelHandler(event) {
-	event = event || window.event;
-	if (event.wheelDelta) {
-		var direction = event.wheelDelta > 0 ? 1 : -1;
-	} else if (event.detail) {
-		var direction = event.detail > 0 ? -1 : 1;
-	}
-	oH2.innerText = direction;
+  event = event || window.event;
+  if (event.wheelDelta) {
+    var direction = event.wheelDelta > 0 ? 1 : -1;
+  } else if (event.detail) {
+    var direction = event.detail > 0 ? -1 : 1;
+  }
+  oH2.innerText = direction;
 }
 ```
 
-###异常处理
-```
+### 异常处理
+
+```js
 try {
-	可能会出错的代码
+  可能会出错的代码
 } catch(error) {
-	console.log(error);
+  console.log(error);
 }
 ```
 
-###JSON对象的序列化和反序列化
-```
+### JSON对象的序列化和反序列化
+
+```js
 JSON.stringify(对象); 对象转换为字符串
 JSON.parse(json格式的字符串); 字符串转为对象
 ```
 
-##20170904
-```
+## 20170904
+
+```js
 字面量方式创建对象(JSON)，对象的属性访问可以是点或者中括号,中括号中可以有变量
 对象的属性可以不加引号，可以有空格，有特殊字符，如果有空格或特殊字符，
 访问的时候只能用中括号
 对象的值可以是任何数据类型
 this的六种情况：
-	直接调用，this是window
-	事件处理函数，this是触发当前事件的dom对象
-	定时器中的this是指window
-	对象.方法名(), this是指前面的这个对象; 原型上面的方法中的this,得看哪个对象调用这个方法，谁调用，this就是谁
-	函数.call(obj), 函数.apply(obj) 里面的this是指obj
-	构造函数中的this, 是指new新创建出来的空对象
-	总而言之：this的值是看如何调用的；闭包中的内容是看定义在哪儿
+  直接调用，this是window
+  事件处理函数，this是触发当前事件的dom对象
+  定时器中的this是指window
+  对象.方法名(), this是指前面的这个对象; 原型上面的方法中 this,得看哪个对象调用这个方法，谁调用，this就是谁
+  函数.call(obj), 函数.apply(obj) 里面的this是指obj
+  构造函数中的this, 是指new新创建出来的空对象
+  总而言之：this的值是看如何调用的；闭包中的内容是看定义在哪儿
 构造函数（类）
-	首字母大写，里面可以定义属性和调用方法
+  首字母大写，里面可以定义属性和调用方法
 构造函数的原型上面定义方法
 构造函数中有返回值：
-	1.返回的是基础数据类型会忽略，依然返回创建出的对象
-	2.返回的是引用类型，则会将这个引用类型对象返回
+  1.返回的是基础数据类型会忽略，依然返回创建出的对象
+  2.返回的是引用类型，则会将这个引用类型对象返回
 
 根据面向过程的代码改写成面向对象：
-	把变量变成属性，把函数变成方法
-	属性和方法前面通常都加上this, 如果方法里面有定时器，事件绑定，
-	我们一定要在这之前备份this；var self = this;
+  把变量变成属性，把函数变成方法
+  属性和方法前面通常都加上this, 如果方法里面有定时器，事件绑定，
+  我们一定要在这之前备份this；var self = this;
 原型：
-	所有的函数都有原型 函数.prototype
-	所有的对象都有原型对象 [].__proto__
-	原型上有constructor指向到构造函数
+  所有的函数都有原型 函数.prototype
+  所有的对象都有原型对象 [].__proto__
+  原型上有constructor指向到构造函数
 原型链：
-	根据__proto__不断的往上找，直到到了Object就到终点了，不再继续找
+  根据__proto__不断的往上找，直到到了Object就到终点了，不再继续找
 Object是对象
 函数也是对象
 基础数据类型之所以能够调用方法，是因为在调用方法的时候会临时添加一个
@@ -1337,20 +1346,23 @@ Object是对象
 JavaScript秘密花园：http://bonsaiden.github.io/JavaScript-Garden/zh/#core.semicolon
 ```
 
-##20170905
-原型链：
-	当访问对象的属性和方法时，先在当前对象身上查找，如果找到就返回
-	如果当前对象找不到会找当前对象的原形对象（对象的构造函数的prototype)，找到则返回
-	如果原型对象上找不到会一直往上找到Object为止
-	如果Object.prototype上找不到则会报错，提示 对象.属性 is not defined
+## 20170905
 
-##20170906
+原型链：
+  当访问对象的属性和方法时，先在当前对象身上查找，如果找到就返回
+  如果当前对象找不到会找当前对象的原形对象（对象的构造函数的prototype)，找到则返回
+  如果原型对象上找不到会一直往上找到Object为止
+  如果Object.prototype上找不到则会报错，提示 对象.属性 is not defined
+
+## 20170906
+
 当你请求一个URL地址，如果返回的是html， 说明这是一个页面
 当你请求一个URL地址，如果返回的是json字符串，我们这是一个API
 在实际工作中拿到API文档之后，仔细阅读，不懂的问后端同事；调试API，配置好对应的参数，使用正确的请求方式，使用模拟API请求的工具（postman)；请求方式，API地址，GET传参，POST传参
 
 经典的AJAX请求代码，这个代码只在学习和面试的时候比较有用，对于你了解底层，实际工作中可能永远接触不到，原因是都被封装起来了
-```
+
+```js
 var xhr = new XMLHttpRequest();
 //绑定准备状态改变事件
 xhr.onreadystatechange = function() {
@@ -1393,8 +1405,7 @@ xhr.open(请求方式，API地址，是否为异步); true表示异步，false�
 页面之间传值，可以通过get传参
 在需要传递的页面的a链接中写上 目标页面的地址?id=1
 
-web服务器nginx的安装，退出，使用
-http://nginx.org/en/download.html 下载一个版本
+web服务器nginx的安装，退出，使用<http://nginx.org/en/download.html>下载一个版本
 下载完之后解压，解压好了就相当于安装
 解压完了打开目录里面的nginx.exe启动，双击之后看不到任何效果，在浏览器里面输入localhost或者127.0.0.1 打开网站根目录下的index.html
 退出方式1：把浏览器打开localhost的页面关闭；右击任务栏，启动任务管理器，进程，输入nginx进行搜索，右击nginx, 结束进程树，结束进程树  这个时候退出了，浏览器里面打开localhost提示无法网站网站，说明退出成功
@@ -1419,10 +1430,16 @@ http-server
 
 localStorage.属性 = 值 //设置值
 localStorage.属性 //设置值
-<div data-id="">
-obj.dataset.id //获得
 
+```html
+<div data-id="">
 ```
+
+```js
+obj.dataset.id //获得
+```
+
+```js
 function getQueryString(name) {
   var search = location.search.substr(1);
   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -1430,13 +1447,15 @@ function getQueryString(name) {
   return result === null ? null : decodeURIComponent(result[2]);
 }
 ```
+
 nextElementSibling
 ES6对象的简写：
 {
   当属性和值一样的时候，只写一个
 }
 
-##20170908
+## 20170908
+
 Github上面的项目，在设置里面开启git pages，这样可以直接浏览静态网站，如果有ajax,需要请求的API也是https协议或者你自定义一个域名
 自己可以购买域名
 自己可以购买云主机（阿里云，腾讯云）
@@ -1444,14 +1463,16 @@ Github上面的项目，在设置里面开启git pages，这样可以直接浏�
 box-sizing属性
 DOM对象.classList属性，有 add方法和remove方法
 
-##动态商城网站项目
+## 动态商城网站项目
+
 团队合作：
   git操作不熟练
   项目初期目录和文件的规划
   基础知识（DOM操作，兼容性）
   Ajax(GET/POST)
 
-##20170918
+## 20170918
+
 jQuery
 自制一个jQuery:
   可以批量选择元素，支持CSS选择器，返回一个类数组对象
@@ -1466,70 +1487,135 @@ jQuery版本：
 $(选择器) 可以选中元素，并返回jQuery($.fn.init的对象)
 方法：
   html(html)/html() //设置或返回innerHTML内容
+
   css(属性,值); css({属性:值,属性:值});/css(属性); //设置或者返回css的计算后属性
   animate(目标状态的JSON，时长，回调函数);
+
   $().事件名(事件处理函数); //事件处理函数当中的 $(this) 表示当前操作的元素的jQuery对象
+
   stop(true, true); //清空当前动画队列，并将当前动画立即执行结束
+
   eq(index); 返回对应索引的jQuery对象
+
   addClass(类名); //添加类名 元素.classList.addClass(类名); 也可以使用className的字符串拼凑方法
+
   removeClass(类名); //移除类名
+
   siblings(); 返回所有的兄弟元素
+
   clone(); 克隆元素
+
   父元素.append(子元素);//追加到后面
+
   父元素.prepend(子元素);//在父元素的内部头部插入
+
   子元素.appendTo(父元素); //添加到父元素内部
+
   子元素.prependTo(父元素);
+
   新元素.insertBefore(旧元素);
+
   新元素.insertAfter(旧元素);
+
   旧元素.before(新元素);
+
   旧元素.after(新元素);
+
   旧元素.wrap(新元素);//用新元素包裹旧元素
+
   旧元素.wrapAll(新元素);//把所有的旧元素作为一组，在外面包裹新元素
   元素.empty(); //将元素内部的innerHTML清空
+
   元素.remove(); //移除元素
+
   元素.attr() ;//设置或获取自定义属性
+
   元素.prop(); //设置或获取元素固有的属性
-  jquery对象转DOM对象；$('p')[1];
-  DOM对象转jQuery对象：$(DOM对象或DOM字符串) $(window) $(document) $(this) $("<div></div>").appendTo()
+
+  jquery对象转DOM对象;
+
+  ```js
+  $('p')[1];
+  ```
+
+  DOM对象转jQuery对象：$(DOM对象或DOM字符串) $(window) $(document) $(this) $("\<div>\</div>").appendTo()
+
   width()//width
+
   innerWidth()//width+padding
+
   outerWidth()//width+padding+border
+
   outerWidth(true)//width+padding+border+margin
+
   offset()//返回元素的净位置  offset().top 返回元素到顶部的净位置
+
   mousewheel();//滚轮事件，是一个官方的插件，默认的jquery里面不包含
+
   $(window).scrollTop(); /scrollTop(0); //获取scrollTop的值，设置scrollTop的值
+
   $('html,body').animate({"scrollTop": 0}, 1000); //滚动添加动画
+
   $(window).scroll();//滚动事件
+
   show();//显示
+
   hide();//隐藏
+
   toggle(); //显示/隐藏
+
   slideDown(); //下拉显示
+
   slideUp(); //上拉隐藏
+
   slideToggle(); //显示/隐藏
+
   fadeIn(); //淡入
+
   fadeOut(); //淡出
+
   fadeToggle();//淡入/淡出
+
   fadeTo(500, 0.3); //切换到对应的透明度; 如果说切换到对应的透明度之后再fadeIn的时候，就只能到达这种状态
+
   delay(600);//延迟
+
   stop(); stop(false,false);//停止并结下一个动画
+
   stop(true);//停止并清空队列
+
   stop(true, true);//瞬间完成当前的动画并清空队列
+
   stop(false, true); //瞬间完成当前的动画并继续下一个
+
   finish();//瞬间完成队列中所有的动画
+
   is(选择器);//判断jquery对象是否符合当前的选择器
+
   index(); //返回元素在真实的亲兄弟之间的序号
+
   children();//子元素，不包含孙子元素
+
   find();//找后代元素，包括儿子孙子等等
+
   parent();//父元素
+
   parents();//祖先元素
+
+```js
   each(function(index, item){
     console.log(index, item);
     });//遍历数组或类数组元素
+```
+
   get(1); //相当于[1], 得到的是DOM元素
+
   $.get(url, {}, function(json){
     }); //返回的数据如果是json字符串, 自动帮我们转换成了对象，我们可以直接使用
+
   $.post(url, {}, function(json){
     });//返回的数据是json字符串会自动转换
+
   $.ajax({
     url: 地址,
     type: 请求方式get/post,
@@ -1537,9 +1623,14 @@ $(选择器) 可以选中元素，并返回jQuery($.fn.init的对象)
     data: 请求时的数据对象,
     success: 成功时的回调
     })
+
   表单元素.serialize(); //获取表单当中的所有包含name属性的输入元素的查询字符串; k=v&k1=v1
+
   表单元素.serializeArray(); //获取表单当中所有包含name属性的输入元素的数组
+
   想要获取对应的对象：
+
+```js
   function formArrayToObject(arr) {
     var obj = {};
       for (var i = 0; i < arr.length; i++) {
@@ -1549,40 +1640,58 @@ $(选择器) 可以选中元素，并返回jQuery($.fn.init的对象)
   }
   var formArray = $("form").serializeArray();
   var formObject = formArrayToObject(formArray);
+```
 
 筛选器：
   $(元素)
-  $(元素:first)
-  $(元素:last)
-  $(元素:eq(3))
-  $(元素:lt(3))
-  $(元素:gt(3))
-  $(元素:odd)
-  $(元素:even)
-  :animated
-  :visible
-  :checked
 
+  $(元素:first)
+
+  $(元素:last)
+
+  $(元素:eq(3))
+
+  $(元素:lt(3))
+
+  $(元素:gt(3))
+
+  $(元素:odd)
+
+  $(元素:even)
+
+  :animated
+
+  :visible
+
+  :checked
 
 对同一个元素设置多个animate, 会把动画添加到动画队列当中
 jQuery的插件无非就是丰富一下jQuery对象的方法(给jquery对象的原型上面加方法)；$.fn.draggable = function(){}; 后面使用jquery选中的元素就可以此方法（$('p').draggable());
 
-##20170920
+## 20170920
+
 浏览器端跨域
 同源策略(浏览器)
 浏览器同一时间向同一个域名只能发送8个请求；所以使用多个域名的方式提升性能（为了服务器的安全，一次只能向同一个域名发送8个请求)
 怎么区分数组和类数组（看原型）
+
 URL：协议://IP地址或域名:端口/路径/文件?查询字符串#hash
-http://www.163.com/a/b.html
+
+<http://www.163.com/a/b.html>
 http默认的是80端口
-https://www.163.com/a/b.html
+
+<https://www.163.com/a/b.html>
 如果你网站的协议是使用的https, 那你请求的所有资源都需要是https
 
 服务器端是可以跨域；可以用后端语言做爬虫（爬虫把一个页面就当成一个API）
-jsonp:
+
+## jsonp
+
+```js
 jsonp('http://h6.duchengjiu.top/shop/api_cat.php?format=jsonp&callback=fun', 'fun', function(data){
   console.log(data);
 });
+
 //编写一个实用的轮子
 function jsonp(URL, callbackname, callback) {
   //在window对象上强行增加一个属性，这个属性就是全局变量，是一个函数的名字
@@ -1594,7 +1703,11 @@ function jsonp(URL, callbackname, callback) {
   script.src = URL;
   document.body.removeChild(script);
 }
-jquery中的jsonp:
+```
+
+### jquery中的jsonp
+
+```js
 $.ajax({
   url: "http://h6.duchengjiu.top/shop/api_cat.php?format=jsonp&callback=fun",
   dataType: 'jsonp',
@@ -1603,6 +1716,7 @@ $.ajax({
     console.log(data);
   }
 });
+```
 
 模板引擎：
   template标签用来存放模板的内容，不会显示在页面上
@@ -1630,7 +1744,8 @@ jquery插件开发：
   }
 htmlshiv.js兼容低版本浏览器
 
-##20170926
+## 20170926
+
 H5C3
 2D:
 transition:
@@ -1652,7 +1767,6 @@ transform-style: preserve-3d; //保持3D
 animation: 动画名称 持续时长 缓冲函数名 延迟时间 循环次数 是否折返 是否保持最终状态;
 animation: move 1s ease 0s infinite alternate forwards;
 animtion-play-state: paused;
-
 
 prototype.js
 
@@ -1677,7 +1791,6 @@ animate.css的动画分类：
 缩放出场
 特殊特效
 
-
 //让元素垂直居中的一种方式
 top: 50%
 transform: translateY(50%); //这个值相对于高
@@ -1686,7 +1799,7 @@ left: 50%;
 transform: translateX(50%);//这个值相对于宽
 
 图片的外层和a链接的外层，通常都会用div包裹，因为这个位置的元素内容可能会更新，一更新内容可能会导致页面布局就乱了，所以通常用div去布局，不要让具体的一个元素去布局
-布局元素：header div nav ul li     
+布局元素：header div nav ul li
 具体的元素：a img input
 
 图片加超链接的情况，通常用一个a链接，然后用伪元素去定位图片，用line-height去定位文字
@@ -1705,10 +1818,15 @@ text-align: center;
 /*或者padding*/
 /*padding-left: 8px;*/
 
-20171016
+## 20171016
+
 canvas用来制作图表，游戏，广告banner, 常用的会用的话5个属性，15个方法就行
 
+```html
 <canvas width="500" height="500">不支持的浏览器会显示</canvas>
+```
+
+```js
 var canvas = document.querySelector('canvas');
 var ctx = canvas.getContext('2d');
 //绘制元素主要是有一堆的方法去设置笔的样式，以及一堆的方法去绘制具体的图形或文字或图片
@@ -1770,23 +1888,35 @@ save();保留当前的上下文，相当于是保留了ctx对象的所有的属�
 ctx.translate(x+self.width/2, y+self.height/2);//旋转的时候把参考点改变一下
 ctx.rotate(20);//旋转的角度
 ctx.drawImage(img, sx, sy, swidth, sheight, -dwidth/2, -dheight/2, dwidth, dheight);//对应的位置也要相应的发生变化,-宽度的一半
+```
 
-20171017
 和canvas类似的可以绘图的是svg, 不过这个是描述性的， 不是通过js的api去绘制
 遇到SVG图片，然后颜色还不一样，这个时候可以统一的上传到iconfont网站，然后把颜色去掉再下载
 
-#20171017
+## 20171017
+
 Node的内容非常非常重要，因为现在前端开发都讲究工程化，gulp, webpack, express, vue-cli, vue
+
 nodejs的三大特征：单线程，非阻塞I/O，事件机制
+
 I/O 对于计算机来说可以在内存当中写数据或数据，可以在硬盘当中写数据读数据，也可以从网络当中去读数据或写数据
+
 nodejs安装
+
 到官网下载程序安装
+
 会自动将程序的路径添加到环境变量的PATH里面，在执行程序的时候会把这个PATH变量里面所有的路径去找，找到了则执行，找不到则报错
+
 验证安装
 node -v
+
 cmd和git bash的区别：
+
 cmd: c: d:
+
 git bash: cd /c     cd /d
+
+```js
 //执行一个nodejs的文件
 node 要执行的js文件.js
 //如果运行的这个文件是启动一个web server, 需要手动的打开浏览器，输入地址去查看
@@ -1984,14 +2114,14 @@ res.json({'data':"a"})
 
 路由： http://www.expressjs.com.cn/guide/routing.html
 
-res.download()	提示下载文件。
-res.end()	终结响应处理流程。
-res.json()	发送一个 JSON 格式的响应。
-res.jsonp()	发送一个支持 JSONP 的 JSON 格式的响应。
-res.redirect()	重定向请求。
-res.render()	渲染视图模板。
-res.send()	发送各种类型的响应。
-res.sendFile	以八位字节流的形式发送文件。
+res.download()  提示下载文件。
+res.end() 终结响应处理流程。
+res.json()  发送一个 JSON 格式的响应。
+res.jsonp() 发送一个支持 JSONP 的 JSON 格式的响应。
+res.redirect()  重定向请求。
+res.render()  渲染视图模板。
+res.send()  发送各种类型的响应。
+res.sendFile  以八位字节流的形式发送文件。
 res.sendStatus()
 
 nodejs进程管理：
@@ -2296,7 +2426,7 @@ var Animal = (function () {
             }
             this.setSex = function(newsex) { // setter
                 sex = newsex;
-            }  
+            }
         }
         //公共方法
         Animal.prototype.say = function() {
@@ -2347,7 +2477,7 @@ ES2017: async await 实际上是generator和yield的语法糖
 操作系统：chocolatey brew centos:yum ubuntu:apt-get
 语言：php:pear,composer java:maven ruby:gem
 
-yarn, Browserify, Grunt, eslint, lint, async, commonjs, amd, requirejs, haml, coffee script, typescript    
+yarn, Browserify, Grunt, eslint, lint, async, commonjs, amd, requirejs, haml, coffee script, typescript
 
 >>>>>>> 1cf6b0d74932c14e9446bae9ef222a825d64b1ff
 ##5点后的练习计划
