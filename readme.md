@@ -1,112 +1,111 @@
-# HTML5Course20170717
+# FE
 
 ## 20170821
 
 ```javaScript
+  //获取元素
+  document.getElementById()  //一个DOM对象
+  DOM对象.getElementById()
+  document.getElementsByTagName() //包含多个DOM对象的数组
+  DOM对象.getElementsByTagName()
 
-//获取元素
-document.getElementById()  //一个DOM对象
-DOM对象.getElementById()
-document.getElementsByTagName() //包含多个DOM对象的数组
-DOM对象.getElementsByTagName()
+  //创建元素
+  document.createElement('') //可以创建p,div,span,link,script,img
 
-//创建元素
-document.createElement('') //可以创建p,div,span,link,script,img
+  //创建事件
+  document.createEvent('kaiyu');
 
-//创建事件
-document.createEvent('kaiyu');
+  //属性
+  innerText, innerHTML,checked(true|false ""|"checked")，title, value, src, href, contentEditable
 
-//属性
-innerText, innerHTML,checked(true|false ""|"checked")，title, value, src, href, contentEditable
+  //DOM元素API参考，包括属性和方法 https://developer.mozilla.org/zh-CN/docs/Web/API/Element
 
-//DOM元素API参考，包括属性和方法 https://developer.mozilla.org/zh-CN/docs/Web/API/Element
+  ///修改皮肤就是切换样式的href属性值
+  通用的属性：id, class, name, title, style
+  document.title //获取文档的标题
 
-///修改皮肤就是切换样式的href属性值
-通用的属性：id, class, name, title, style
-document.title //获取文档的标题
+  //自定义属性
+  对原有标签的功能进行扩展，v-for, v-if, v-show;
+  用来在元素上面存储数据data-id="1" username="maxwell"
 
-//自定义属性
-对原有标签的功能进行扩展，v-for, v-if, v-show;
-用来在元素上面存储数据data-id="1" username="maxwell"
+  //属性操作
+  DOM对象.属性名  //获取属性
+  DOM对象.属性名 = 属性值 //设置属性
 
-//属性操作
-DOM对象.属性名  //获取属性
-DOM对象.属性名 = 属性值 //设置属性
+  //非标准的属性需要使用以下方式去获取和设置，当然也对标准属性进行操作，是比较通用的
+  DOM对象.getAtrribute(属性名)  //获取属性
+  DOM对象.setAttribute(属性名, 属性值) //设置属性
+  DOM对象.hasAttribute(属性名) //判断是否有某个属性
 
-//非标准的属性需要使用以下方式去获取和设置，当然也对标准属性进行操作，是比较通用的
-DOM对象.getAtrribute(属性名)  //获取属性
-DOM对象.setAttribute(属性名, 属性值) //设置属性
-DOM对象.hasAttribute(属性名) //判断是否有某个属性
+  //元素操作
+  DOM对象.appendChild(要添加的对象)
+  DOM对象.insertBefore(要添加的对象，要添加到哪个对象的前面)
 
-//元素操作
-DOM对象.appendChild(要添加的对象)
-DOM对象.insertBefore(要添加的对象，要添加到哪个对象的前面)
+  //节点关系
+  DOM对象.childNodes  数组//获取所有的子节点，包括文本节点，元素节点，注释节点
+  节点.nodeType //值可以 1是元素节点
+  DOM对象.previousSibling //上一个兄弟节点,可能是文本节点或注释节点
+  DOM对象.previousElementSibling //上一个兄弟元素节点
+  DOM对象.parentNode //父节点
 
-//节点关系
-DOM对象.childNodes  数组//获取所有的子节点，包括文本节点，元素节点，注释节点
-节点.nodeType //值可以 1是元素节点
-DOM对象.previousSibling //上一个兄弟节点,可能是文本节点或注释节点
-DOM对象.previousElementSibling //上一个兄弟元素节点
-DOM对象.parentNode //父节点
+  //样式
+  DOM对象.style.样式 //样式如果是中横线，需要改成驼峰命名；这里的样式只能够得到或者设置行内样式
+  getComputedStyle(DOM对象) //获取DOM对象的计算后属性的对象（CSSOM）
+  DOM对象.className 设置class的值，如果有多个，可以用字符串拼凑
 
-//样式
-DOM对象.style.样式 //样式如果是中横线，需要改成驼峰命名；这里的样式只能够得到或者设置行内样式
-getComputedStyle(DOM对象) //获取DOM对象的计算后属性的对象（CSSOM）
-DOM对象.className 设置class的值，如果有多个，可以用字符串拼凑
+  //事件, 事件可以嵌套
+  //绑定事件
+  DOM对象.on事件名 = function() {
+    //这里面的this指向当前对象
+  }
 
-//事件, 事件可以嵌套
-//绑定事件
-DOM对象.on事件名 = function() {
-  //这里面的this指向当前对象
-}
+  //取消绑定事件
+  DOM对象.on事件名 = null;
 
-//取消绑定事件
-DOM对象.on事件名 = null;
+  常用事件名：
+  鼠标：click, dblclick, mouseover, mouseout, mousedown, mouseup, mousemove,
+  contextmenu, mouseenter, mouseleave, mousewheel, DOMMouseScroll(Firefox),
+  mouseenter和mouseleave不会冒泡，mouseover, mouseout会冒泡
+  表单事件：submit, reset
+  键盘：keyup, keydown, keypress, input
+  窗口相关：scroll, resize
+  input框：invalid, focus(不冒泡), blur(不冒泡), change, input
+  资源加载：load, DOMContentLoaded
+  load事件是指当前页面结构加载完成，并且里面的所有资源都加载完成
 
-常用事件名：
-鼠标：click, dblclick, mouseover, mouseout, mousedown, mouseup, mousemove,
-contextmenu, mouseenter, mouseleave, mousewheel, DOMMouseScroll(Firefox),
-mouseenter和mouseleave不会冒泡，mouseover, mouseout会冒泡
-表单事件：submit, reset
-键盘：keyup, keydown, keypress, input
-窗口相关：scroll, resize
-input框：invalid, focus(不冒泡), blur(不冒泡), change, input
-资源加载：load, DOMContentLoaded
-load事件是指当前页面结构加载完成，并且里面的所有资源都加载完成
+  //变量
+  全局变量其实就是把当前变量名放到window当中的一个属性
 
-//变量
-全局变量其实就是把当前变量名放到window当中的一个属性
+  //函数
+  函数其实就是把函数名作为window当中的一个属性，他的值的是function
 
-//函数
-函数其实就是把函数名作为window当中的一个属性，他的值的是function
+  //调试能力：最重要，自学的时候有用，写代码的时候有用，调试的时候更有用
+  console.log()
+  console.dir()
+  断点调试，添加观察表达式，调用堆栈， 作用域（local, closure, global)
+  网络环境模拟
+  DOM断点
+  事件监听断点
+  Ajax断点
 
-//调试能力：最重要，自学的时候有用，写代码的时候有用，调试的时候更有用
-console.log()
-console.dir()
-断点调试，添加观察表达式，调用堆栈， 作用域（local, closure, global)
-网络环境模拟
-DOM断点
-事件监听断点
-Ajax断点
+  //概念的理解
+  user agent表示当前的浏览器，它代理你去上网
+  信号量 非常重要，一定要理解，就是页面元素的变化都根据这个信号量来决定，自己说的一个名词；实际上说白就是一个变量或者属性
+  业务逻辑方法  信号量和业务逻辑通常是对应的，业务逻辑会根据信号量的值作出不同的决定，到底是改变元素的颜色还是大小，还是位置等等
+  页面解析顺序是文本的从上到下；如果js代码写在需要获取的html元素之上的时候，会暴错，获取不到；如果需要写在上面，要添加window.onload事件
+  资源：只要是有链接地址的都是资源，不论里面的内容是什么；
+  html内容是资源， css文件，js文件，图片，音频，视频，网络字体文件，API
+  URL: 统一资源定位符
+  URL地址包括：http://www.baidu.com:80/news/index.php?username=a#fa
+  协议://域名或IP:端口号/路径/文件名?queryString#锚点(hash)
+  queryString和hash值都可以用来在页面之间传递
 
-//概念的理解
-user agent表示当前的浏览器，它代理你去上网
-信号量 非常重要，一定要理解，就是页面元素的变化都根据这个信号量来决定，自己说的一个名词；实际上说白就是一个变量或者属性
-业务逻辑方法  信号量和业务逻辑通常是对应的，业务逻辑会根据信号量的值作出不同的决定，到底是改变元素的颜色还是大小，还是位置等等
-页面解析顺序是文本的从上到下；如果js代码写在需要获取的html元素之上的时候，会暴错，获取不到；如果需要写在上面，要添加window.onload事件
-资源：只要是有链接地址的都是资源，不论里面的内容是什么；
-html内容是资源， css文件，js文件，图片，音频，视频，网络字体文件，API
-URL: 统一资源定位符
-URL地址包括：http://www.baidu.com:80/news/index.php?username=a#fa
-协议://域名或IP:端口号/路径/文件名?queryString#锚点(hash)
-queryString和hash值都可以用来在页面之间传递
+  //页面传值：
+  本地存储，localStorage, sessionStorage, cookie
 
-//页面传值：
-本地存储，localStorage, sessionStorage, cookie
-
-//技巧
-state = !state //通常用来做 toggle 效果，或者开关
-class设置样式，id属性用来给js使用
+  //技巧
+  state = !state //通常用来做 toggle 效果，或者开关
+  class设置样式，id属性用来给js使用
 ```
 
 ``` javaScript
@@ -1597,6 +1596,8 @@ $(选择器) 可以选中元素，并返回jQuery($.fn.init的对象)
   children();//子元素，不包含孙子元素
 
   find();//找后代元素，包括儿子孙子等等
+  
+  prev(); //前一个兄弟节点
 
   parent();//父元素
 
